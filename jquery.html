@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <meta name="description" content="Basic to-do app with Vue.js 2.1">
+  <meta name="author"  content="https://styde.net">
+  <link rel="icon" href="favicon.ico">
+
+  <title>Lección 1 - Vue 2 - Styde.net</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+  integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+  crossorigin="anonymous">
+
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="container">
+    <div id="register">
+      <form id="form_register">
+        <h4>Registrate</h4>
+          <div class="form-group">
+            <label for="first_name">Nombre:</label>
+            <input type="text" id="first_name" class="form-control">
+          </div>
+          <div class="form-group">
+            <label for="last_name">Apellido:</label>
+            <input type="text" id="last_name" class="form-control">
+          </div>
+          <button type="submit" id="btn_continue"class="btn btn-primary" disabled>Continuar</button>
+      </form>
+    </div>
+    <div id="welcome" style="display: none">
+      <h4>Bienvenido, [nombre completo]</h4>
+    </div>
+    <footer class="footer">
+      <hr>
+      <p>&copy; 2017 Styde.net</p>
+    </footer>
+  </div>
+
+    <script
+    src="https://code.jquery.com/jquery-3.2.1.js"
+    integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+    crossorigin="anonymous"></script>
+
+    <script>
+    $(document).ready(function(){
+
+      function isFormValid(){
+        return $('#first_name').val() != '' && $('#last_name').val() != '';
+      }
+
+      function toggleEnableContinue() {
+        $('#btn_continue').prop('disabled', !isFormValid());
+
+        // if (isFormValid()){
+        //   $('#btn_continue').removeAttr('disabled');
+        // } else {
+        //   $('#btn_continue').attr('disabled', 'disabled');
+        // }
+      }
+      //Cuando se ingrese texto en alguna de estas dos entradas, llamar a la función toggleEnableContinue
+      $('#first_name, #last_name').keyup(toggleEnableContinue);
+
+      $('#form_register').submit(function(e){
+        e.preventDefault();
+
+        if (!isFormValid()) return;
+        $('#register').hide();
+        $('#welcome').show();
+        $('#welcome h4').text(
+          "Bienvenida, " + $('#first_name').val() + " " + $('#last_name').val() + '!'
+        );
+      })
+    });
+    </script>
+
+</body>
+</html>
