@@ -36,17 +36,18 @@
     <div v-else>
       <h4>Bienvenido {{first_name}} {{last_name}}</h4>
     </div>
-    <footer class="footer">
+    <footer>
       <p>&copy; 2017 Styde.net</p>
     </footer>
   </div>
 
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.2/vue.js"></script>
   <script>
+  // objeto vm == instancia de Vue
   new Vue({
     el:"#app",
     data: {
-      first_name: '',
+      first_name:  '', //Siempre hay que inicializar las propiedades/variables!
       last_name: '',
       formSubmitted: false
     },
