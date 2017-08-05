@@ -34,7 +34,9 @@
       </form>
     </div>
     <div v-else>
-      <h4>Bienvenido {{first_name}} {{last_name}}</h4>
+      <h2 v-once>{{ project }}</h2>
+      <h4>Bienvenido {{ first_name.toUpperCase()}} {{ last_name + '!!' }}</h4>
+      <h5>{{ first_name }} al revés: {{ reversedName }}</h5>
     </div>
     <footer>
       <p>&copy; 2017 Styde.net</p>
@@ -47,9 +49,16 @@
   new Vue({
     el:"#app",
     data: {
-      first_name:  '', //Siempre hay que inicializar las propiedades/variables!
+      first_name:  '', //Siempre hay que inicializar las propiedades/variables del objeto data
       last_name: '',
-      formSubmitted: false
+      formSubmitted: false,
+      project: 'Vue'
+    },
+
+    computed: { //Son propiedades dinámicas, dependen del valor de otras propiedades
+      reversedName: function(){
+        return this.first_name.split('').reverse().join('');
+      }
     },
     methods: {
       isFormValid: function(){
