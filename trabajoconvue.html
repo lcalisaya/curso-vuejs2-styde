@@ -1,0 +1,114 @@
+<DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <meta name="description" content="Basic to-do app with Vue.js 2.1">
+  <meta name="author"  content="https://styde.net">
+  <link rel="icon" type="image/png" href="check.png" />
+  <title>Curso de VueJs - Styde.net</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+  integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+  crossorigin="anonymous">
+
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div id="app" class="container">
+    {{$data }}
+    <h4>Has trabajado con VueJs?</h4>
+
+    <div class="radio">
+      <label class="radio-inline">
+        <input type="radio" v-model="vue.exp" :value="1"> Sí
+      </label>
+      <label class="radio-inline">
+        <input type="radio" v-model="vue.exp" :value="0"> No
+      </label>
+    </div>
+
+    <template v-if="vue.exp">
+    <!-- Si la respuesta es sí -->
+    <div class="form-group">
+      <label for="vue_years">Cuántos años de experiencia con Vue tienes?</label>
+      <input type="number" v-model="vue.years"class="form-control">
+    </div>
+
+<!-- Alternativa inicial para una clase estática y otra dinámica:
+<div v-if="vue.years < 2"
+        :class=" 'form-group' + (descriptionError ? ' has-error' : '') ">
+-->
+
+    <!-- Si tiene 1 año de experiencia o menos-->
+    <div v-if="vue.years < 2"
+            class="form-group"
+            :class="{ 'has-error': descriptionError }"
+            :style="[{color: '#2ac60a', descriptionStyles}]"> <!--Alternativa 2-->
+      <label class="control-label">¿Qué te motivó a aprender Vue?</label>
+      <textarea rows="4" v-model="vue.description" class="form-control"></textarea>
+      <p v-if=" descriptionError != '' " class="help-block">
+        {{ descriptionError }}
+      </p>
+    </div>
+
+    <!-- Si ha trabajado 2 años o más -->
+    <div v-else
+            :class="{ 'form-group':true, 'has-error': descriptionError != null }"
+            :style="[{color: '#2ac60a', descriptionStyles}]"> <!--Alternativa 3-->
+      <label class="control-label">Cuentanos tu experiencia con VueJs</label>
+      <textarea rows="4" v-model="vue.description" class="form-control"></textarea>
+      <p v-if=" descriptionError != '' " class="help-block">
+        {{ descriptionError }}
+      </p>
+    </div>
+
+  </template>
+
+    <footer>
+      <p>&copy; 2017 Styde.net</p>
+      <!-- <div>Icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a>
+        from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
+        is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
+      </div>
+      -->
+    </footer>
+  </div>
+
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.2/vue.js"></script>
+  <script>
+    var vm = new Vue({
+      el: "#app",
+      data: {
+        vue: {
+          exp: null,
+          years: 0,
+          description: ''
+        }
+      },
+      computed: {
+        descriptionError: function(){
+          var val = this.vue.description.trim();
+          if (val == '') {
+            return 'Campo requerido, debe completarlo.';
+          }
+          if (val.length > 20) {
+            return 'La descripción no debe exceder los 20 caracteres.';
+          }
+          if (val.length < 5) {
+            return 'Ingrese una descripción mayor a 5 caracteres.';
+          }
+        },
+        descriptionStyles: function(){
+          if(this.descriptionError) {
+            return {color: '#f4590d'};
+          }
+          return {};
+        }
+      }
+    });
+  </script>
+</body>
+</html>
