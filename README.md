@@ -9,5 +9,5 @@ README.md
 * Lección #2: Se validan los datos de un formulario con VueJs.
 * Lección #3: Cómo utilizar VueJs devtools.
 * Lección #4: Visualizando datos por interpolaciones.
-* Lección #5: Uso de directivas v-if, v-else, v-show y v-bind para los atributos. Etiqueta <template>.
-* Lección #6: Validar campos con una computed property, cambiar el CSS en línea. Directivas :class y :style
+* Lección #5: Uso de directivas v-if, v-else, v-show y v-bind para los atributos. Etiqueta template.
+* Lección #6: Validar campos con una computed property, cambiar el CSS en línea. Directivas :class y :style.

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <meta name="description" content="Basic to-do app with Vue.js 2.1">
+  <meta name="author"  content="https://styde.net">
+  <link rel="icon" type="image/png" href="check.png" />
+
+  <title>Lección 1 - Vue 2 - Styde.net</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+  integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+  crossorigin="anonymous">
+
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="container" id="app">
+<!--
+    <ol>
+      <li v-for="(task, index) in tasks">{{index + 1}}: {{task}}</li>
+    </ol> -->
+
+<!--
+    <template v-for="(task,index) in tasks">
+      <p>{{index + 1}}: {{task}}</p>
+      <hr>
+    </template> -->
+    <h4>Todas las tareas:</h4>
+    <ul>
+      <li v-for="task in tasks">
+        <del v-if="!task.pending">{{ task.title }}</del>
+        <template v-else>{{ task.title }}</template>
+      </li>
+    </ul>
+
+    <h4 v-if="pendingTasks.length">Solo las tareas pendientes:</h4>
+    <ul v-if="pendingTasks.length">
+      <li v-for="task of pendingTasks">
+        {{ task.title }}
+      </li>
+    </ul>
+
+    <!--
+    <h4>Números con Vue:</h4>
+    <p v-for="number in 20">{{number}}</p> -->
+    <h4>Datos de un objeto: índices, llaves y valores:</h4>
+    <ul>
+      <li v-for="(value, key, index) in user">
+        {{index}}: {{key}}: {{value}}
+      </li>
+    </ul>
+
+    <footer>
+      <p>&copy; 2017 Styde.net</p>
+    </footer>
+  </div>
+
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.2/vue.js"></script>
+  <script>
+  var vm = new Vue({
+    el:'#app',
+    data: {
+      // tasks: [
+      //   'Aprender Vuejs',
+      //   'Inscribirse en Styde',
+      //   'Seguir a @stydenet en Twitter'
+      // ]
+      tasks: [
+        {
+          title: 'Aprender Vuejs',
+          pending: false
+        },
+        {
+          title: 'Inscribirse en Styde',
+          pending: true
+        },
+        {
+          title: 'Seguir a @stydenet en Twitter',
+          pending: false
+        }
+      ],
+      user: {
+        'First name':'Lucia',
+        'Last name': 'Calisaya',
+        username: 'lcalisaya',
+        website: 'sin website aún',
+        description: 'web developer student'
+      }
+    },
+    computed: {
+      pendingTasks: function(){
+        return this.tasks.filter(function(item){
+          return item.pending;
+        });
+      }
+    }
+  });
+  </script>
+</body>
+</html>
