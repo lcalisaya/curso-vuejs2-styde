@@ -14,3 +14,7 @@ footer {
   font-weight: bold;
   text-align: center;
 }
+
+.texto-tachado {
+   text-decoration: line-through;
+}

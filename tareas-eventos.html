@@ -19,40 +19,34 @@
 </head>
 <body>
   <div class="container" id="app">
-<!--
-    <ol>
-      <li v-for="(task, index) in tasks">{{index + 1}}: {{task}}</li>
-    </ol> -->
-
-<!--
-    <template v-for="(task,index) in tasks">
-      <p>{{index + 1}}: {{task}}</p>
-      <hr>
-    </template> -->
     <h4>Todas las tareas:</h4>
     <ul>
-      <li v-for="task in tasks">
-        <del v-if="!task.pending">{{ task.title }}</del>
-        <template v-else>{{ task.title }}</template>
+      <li v-for="task in tasks" :class="{ 'texto-tachado': !task.pending }">
+        {{ task.title }}
       </li>
     </ul>
 
     <h4 v-if="pendingTasks.length">Solo las tareas pendientes:</h4>
     <ul v-if="pendingTasks.length">
-      <li v-for="task of pendingTasks">
+      <li v-for="task of pendingTasks" @click="updatePending(task)">
         {{ task.title }}
       </li>
     </ul>
 
-    <!--
-    <h4>Números con Vue:</h4>
-    <p v-for="number in 20">{{number}}</p> -->
-    <h4>Datos de un objeto: índices, llaves y valores:</h4>
-    <ul>
-      <li v-for="(value, key, index) in user">
-        {{index}}: {{key}}: {{value}}
-      </li>
-    </ul>
+<!--
+    <input type="text"
+              class="form-control"
+              v-model="new_task"
+              v-on:keyup.enter="createTask">   "enter es un modificador" (?)
+    <button class="btn btn-primary" v-on:click="createTask">Crear tarea</button> -->
+
+  <form> <!-- @ es un atajo de v-on: -->
+    <input type="text"
+              class="form-control"
+              v-model="new_task">
+    <button class="btn btn-primary" @click="createTask(true, $event)">Crear tarea pendiente</button>
+    <button class="btn btn-info" @click="createTask(false, $event)">Crear tarea completada</button>
+  </form>
 
     <footer>
       <p>&copy; 2017 Styde.net</p>
@@ -64,31 +58,33 @@
   var vm = new Vue({
     el:'#app',
     data: {
-      // tasks: [
-      //   'Aprender Vuejs',
-      //   'Inscribirse en Styde',
-      //   'Seguir a @stydenet en Twitter'
-      // ]
+      new_task: '',
       tasks: [
         {
-          title: 'Aprender Vuejs',
-          pending: false
-        },
-        {
-          title: 'Inscribirse en Styde',
+          title: 'Aprender javaScript',
           pending: true
         },
         {
-          title: 'Seguir a @stydenet en Twitter',
+          title: 'Practicar Inglés',
+          pending: false
+        },
+        {
+          title: 'Cocinar el almuerzo',
           pending: false
         }
-      ],
-      user: {
-        'First name':'Lucia',
-        'Last name': 'Calisaya',
-        username: 'lcalisaya',
-        website: 'sin website aún',
-        description: 'web developer student'
+      ]
+    },
+    methods: {
+      createTask: function(pending, event){
+        event.preventDefault();
+        this.tasks.push({
+          title: this.new_task,
+          pending: pending
+        });
+        this.new_task = '';
+      },
+      updatePending: function(task){
+      //Ejercicio! cambiar el estado de la tarea del parámetro. Cómo cambiarla en el array tasks.
       }
     },
     computed: {
