@@ -4,7 +4,6 @@ README.md
 ## [Styde.net] (https://styde.net/curso-de-vue-2/)
 ### Profesor: Duilio Palacios.
 
-
 * Lección #1: Se valida el envío de un formulario, primero con jQuery.
 * Lección #2: Se validan los datos de un formulario con VueJs.
 * Lección #3: Cómo utilizar VueJs devtools.
@@ -13,3 +12,4 @@ README.md
 * Lección #6: Validar campos con una computed property, cambiar el CSS en línea. Directivas :class y :style.
 * Lección #7: Directiva v-for para recorrer listas.
 * Lección #8: Manejo de eventos: click, enter, otras teclas y submit.
+* Lección #9: Aplicación de filtros personalizados y combinables.
