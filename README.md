@@ -13,3 +13,4 @@ README.md
 * Lección #7: Directiva v-for para recorrer listas.
 * Lección #8: Manejo de eventos: click, enter, otras teclas y submit.
 * Lección #9: Aplicación de filtros personalizados y combinables.
+* Lección #10: Comienzo de app con funcionalidades CRUD. Presentación de maqueta.

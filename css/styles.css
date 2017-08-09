@@ -9,12 +9,65 @@ html, body {
   height:600px;
 }
 
-footer {
-  padding: 20px;
-  font-weight: bold;
-  text-align: center;
+.container h2 {
+  margin-bottom: 20px;
+  color: #337AB7;
 }
 
 .texto-tachado {
-   text-decoration: line-through;
+  text-decoration: line-through;
+}
+
+/*Para la lista de tareas ingresadas*/
+.tasks {
+  margin-bottom: 40px;
+}
+
+.tasks li {
+  display: flex;
+  justify-content: space-between;
+}
+
+.tasks li.editing {
+  box-shadow: inset 0 0 5px #999;
+}
+
+.tasks input, .tasks .description {
+  flex: 1;
+  padding: 0 5px;
+}
+
+.tasks input {
+  border: 0;
+}
+
+.tasks input:focus {
+  outline: none;
+}
+
+.completed .description {
+  text-decoration: line-through;
+}
+
+.completed, .completed a {
+  color: #999;
+}
+
+/*Para ingresar nuevas tareas*/
+.new-task-form {
+  display: flex;
+}
+
+.new-task-form input {
+  margin-right: 10px;
+}
+
+/*Pie de página*/
+footer {
+  font-weight: bold;
+  margin: 40px 0;
+  padding-top: 20px;
+  border-top: 1px solid #ccc;
+  color: #337AB7;
+  text-align: center;
 }
