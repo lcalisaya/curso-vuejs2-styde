@@ -40,7 +40,7 @@
                         aria-hidden="true"></span>
             </a>
           </div>
-        </li>
+
         </template>
 
         <template v-else>
@@ -56,35 +56,11 @@
             </a>
           </div>
         </template>
-
-
-
-      <!--
-      <li class="list-group-item editing">
-        <a href="#"><span class="glyphicon glyphicon-unchecked"
-                                       aria-hidden="true"></span></a>
-        <input type="text" value="Suscribirse en Styde">
-
       </li>
-      <li class="list-group-item completed">
-        <a href="#"><span class="glyphicon glyphicon-check"
-                                       aria-hidden="true"></span></a>
-        <span class="description">Crear una API</span>
-        <div>
-          <a href="#">
-            <span class="glyphicon glyphicon-edit"
-                      aria-hidden="true"></span>
-          </a>
-          <a href="#">
-            <span class="glyphicon glyphicon-trash"
-                      aria-hidden="true"></span>
-          </a>
-        </div>
-      </li> -->
     </ul>
 
-      <form class="new-task-form">
-        <input type="text" class="form-control">
+      <form class="new-task-form" @submit.prevent="createTask">
+        <input type="text" class="form-control" v-model="new_task">
         <button class="btn btn-primary">Crear tarea</button>
       </form>
 
@@ -93,30 +69,7 @@
     </footer>
   </div>
 
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.2/vue.js"></script>
-  <script>
-    var vm = new Vue({
-      el: '#app',
-      data: {
-        tasks: [
-          {
-            description: 'Aprender Vue.js',
-            pending: true,
-            editing: false
-          },
-          {
-            description: 'Aprender a maquetar',
-            pending: true,
-            editing: true
-          },
-          {
-            description: 'Escuchar radio',
-            pending: false,
-            editing: false
-          }
-        ]
-      }
-    });
-  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.2/vue.js"></script>
+  <script src="js/main.js"></script>
 </body>
 </html>
