@@ -22,35 +22,49 @@
     <h2>Tareas</h2>
 
     <ul class="list-group tasks">
-      <li class="list-group-item">
-        <a href="#"><span class="glyphicon glyphicon-unchecked"
+      <li class="list-group-item" v-for="task in tasks"
+            :class="{ editing: task.editing, completed: !task.pending }">
+        <a href="#"><span class="glyphicon"
+                                      :class="task.pending ? 'glyphicon-unchecked' : 'glyphicon-check' "
                                        aria-hidden="true"></span></a>
-        <span class="description">Aprender Vue.js</span>
-        <div>
-          <a href="#">
-            <span class="glyphicon glyphicon-edit"
-                      aria-hidden="true"></span>
-          </a>
-          <a href="#">
-            <span class="glyphicon glyphicon-trash"
-                      aria-hidden="true"></span>
-          </a>
-        </div>
-      </li>
+
+        <template v-if="!task.editing">
+          <span class="description">{{ task.description }}</span>
+          <div>
+            <a href="#">
+              <span class="glyphicon glyphicon-edit"
+                        aria-hidden="true"></span>
+            </a>
+            <a href="#">
+              <span class="glyphicon glyphicon-trash"
+                        aria-hidden="true"></span>
+            </a>
+          </div>
+        </li>
+        </template>
+
+        <template v-else>
+          <input type="text" v-model="task.description">
+          <div>
+            <a href="#">
+              <span class="glyphicon glyphicon-ok"
+                        aria-hidden="true"></span>
+            </a>
+            <a href="#">
+              <span class="glyphicon glyphicon-remove"
+                        aria-hidden="true"></span>
+            </a>
+          </div>
+        </template>
+
+
+
+      <!--
       <li class="list-group-item editing">
         <a href="#"><span class="glyphicon glyphicon-unchecked"
                                        aria-hidden="true"></span></a>
         <input type="text" value="Suscribirse en Styde">
-        <div>
-          <a href="#">
-            <span class="glyphicon glyphicon-ok"
-                      aria-hidden="true"></span>
-          </a>
-          <a href="#">
-            <span class="glyphicon glyphicon-remove"
-                      aria-hidden="true"></span>
-          </a>
-        </div>
+
       </li>
       <li class="list-group-item completed">
         <a href="#"><span class="glyphicon glyphicon-check"
@@ -66,7 +80,7 @@
                       aria-hidden="true"></span>
           </a>
         </div>
-      </li>
+      </li> -->
     </ul>
 
       <form class="new-task-form">
@@ -84,7 +98,23 @@
     var vm = new Vue({
       el: '#app',
       data: {
-
+        tasks: [
+          {
+            description: 'Aprender Vue.js',
+            pending: true,
+            editing: false
+          },
+          {
+            description: 'Aprender a maquetar',
+            pending: true,
+            editing: true
+          },
+          {
+            description: 'Escuchar radio',
+            pending: false,
+            editing: false
+          }
+        ]
       }
     });
   </script>
