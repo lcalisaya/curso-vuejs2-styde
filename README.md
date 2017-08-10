@@ -15,3 +15,5 @@ README.md
 * Lección #9: Aplicación de filtros personalizados y combinables.
 * Lección #10: Comienzo de app con funcionalidades CRUD. Presentación de maqueta.
 * Lección #11: Se crean tareas en el objeto data y se aplican clases dinámicas y cambio de íconos en estado de edición.
+* Lección #12: Guardar tareas en el objeto tasks.
+* Lección #13: Editar una tarea, primero su borrador para luego confirmar o cancelar el cambio.

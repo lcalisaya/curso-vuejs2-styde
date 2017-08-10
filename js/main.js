@@ -2,6 +2,7 @@ var vm = new Vue({
   el: '#app',
   data: {
     new_task: '',
+    draft: '',
     tasks: [
       {
         description: 'Aprender Vue.js',
@@ -11,7 +12,7 @@ var vm = new Vue({
       {
         description: 'Aprender a maquetar',
         pending: true,
-        editing: true
+        editing: false
       },
       {
         description: 'Escuchar radio',
@@ -30,6 +31,23 @@ var vm = new Vue({
         }
       );
       this.new_task = '';
+    },
+    toggleStatus: function(task){
+      task.pending = !task.pending;
+    },
+    editTask: function(task){
+      this.tasks.forEach(function(item){
+        item.editing = false;
+      });
+      this.draft = task.description;
+      task.editing = true;
+    },
+    updateTask: function(task){
+      task.description = this.draft;
+      task.editing = false;
+    },
+    cancelUpdate: function(task){
+      task.editing = false;
     }
   }
 });

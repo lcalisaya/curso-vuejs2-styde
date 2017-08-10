@@ -21,7 +21,7 @@
   <div class="container" id="app">
     <h4>Todas las tareas:</h4>
     <ul>
-      <li v-for="task in tasks" :class="{ 'texto-tachado': !task.pending }">
+      <li v-for="task in tasks" :class="{ 'texto-tachado': !task.pending }" @click="updatePending(task)">
         {{ task.title }}
       </li>
     </ul>
@@ -85,6 +85,8 @@
       },
       updatePending: function(task){
       //Ejercicio! cambiar el estado de la tarea del parámetro. Cómo cambiarla en el array tasks.
+      //A la tarea que se envía, se le asigna el valor opuesto.
+      task.pending = !task.pending;
       }
     },
     computed: {

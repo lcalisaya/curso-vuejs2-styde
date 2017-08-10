@@ -26,33 +26,36 @@
             :class="{ editing: task.editing, completed: !task.pending }">
         <a href="#"><span class="glyphicon"
                                       :class="task.pending ? 'glyphicon-unchecked' : 'glyphicon-check' "
-                                       aria-hidden="true"></span></a>
+                                      aria-hidden="true"
+                                      @click="toggleStatus(task)">
+                            </span></a>
 
         <template v-if="!task.editing">
           <span class="description">{{ task.description }}</span>
           <div>
             <a href="#">
               <span class="glyphicon glyphicon-edit"
-                        aria-hidden="true"></span>
+                         aria-hidden="true"
+                        @click="editTask(task)">
+              </span>
             </a>
             <a href="#">
               <span class="glyphicon glyphicon-trash"
-                        aria-hidden="true"></span>
+                         aria-hidden="true"></span>
             </a>
           </div>
-
         </template>
 
         <template v-else>
-          <input type="text" v-model="task.description">
+          <input type="text" v-model="draft">
           <div>
             <a href="#">
               <span class="glyphicon glyphicon-ok"
-                        aria-hidden="true"></span>
+                        aria-hidden="true" @click="updateTask(task)"></span>
             </a>
             <a href="#">
               <span class="glyphicon glyphicon-remove"
-                        aria-hidden="true"></span>
+                        aria-hidden="true" @click="cancelUpdate(task)"></span>
             </a>
           </div>
         </template>
