@@ -22,7 +22,7 @@
     <h2>Tareas</h2>
 
     <ul class="list-group tasks">
-      <li class="list-group-item" v-for="task in tasks"
+      <li class="list-group-item" v-for="(task, index) in tasks"
             :class="{ editing: task.editing, completed: !task.pending }">
         <a href="#"><span class="glyphicon"
                                       :class="task.pending ? 'glyphicon-unchecked' : 'glyphicon-check' "
@@ -33,13 +33,12 @@
         <template v-if="!task.editing">
           <span class="description">{{ task.description }}</span>
           <div>
-            <a href="#">
+            <a href="#" @click="editTask(task)">
               <span class="glyphicon glyphicon-edit"
-                         aria-hidden="true"
-                        @click="editTask(task)">
+                         aria-hidden="true">
               </span>
             </a>
-            <a href="#">
+            <a href="#" @click="deleteTask(index)">
               <span class="glyphicon glyphicon-trash"
                          aria-hidden="true"></span>
             </a>
@@ -49,18 +48,20 @@
         <template v-else>
           <input type="text" v-model="draft">
           <div>
-            <a href="#">
+            <a href="#" @click="updateTask(task)">
               <span class="glyphicon glyphicon-ok"
-                        aria-hidden="true" @click="updateTask(task)"></span>
+                        aria-hidden="true" ></span>
             </a>
-            <a href="#">
+            <a href="#" @click="cancelUpdate(task)">
               <span class="glyphicon glyphicon-remove"
-                        aria-hidden="true" @click="cancelUpdate(task)"></span>
+                        aria-hidden="true" ></span>
             </a>
           </div>
         </template>
       </li>
     </ul>
+
+    <p><a href="#" @click="deleteCompleted">Eliminar tareas completadas</a></p>
 
       <form class="new-task-form" @submit.prevent="createTask">
         <input type="text" class="form-control" v-model="new_task">
