@@ -24,23 +24,18 @@
     <ul class="list-group tasks">
       <li class="list-group-item" v-for="(task, index) in tasks"
             :class="{ editing: task.editing, completed: !task.pending }">
-        <a href="#"><span class="glyphicon"
-                                      :class="task.pending ? 'glyphicon-unchecked' : 'glyphicon-check' "
-                                      aria-hidden="true"
-                                      @click="toggleStatus(task)">
-                            </span></a>
+        <a @click="toggleStatus(task)">
+          <app-icon :img="task.pending ? 'unchecked' : 'check' "></app-icon>
+        </a>
 
         <template v-if="!task.editing">
           <span class="description">{{ task.description }}</span>
           <div>
-            <a href="#" @click="editTask(task)">
-              <span class="glyphicon glyphicon-edit"
-                         aria-hidden="true">
-              </span>
+            <a @click="editTask(task)">
+              <app-icon img="edit"></app-icon>
             </a>
-            <a href="#" @click="deleteTask(index)">
-              <span class="glyphicon glyphicon-trash"
-                         aria-hidden="true"></span>
+            <a @click="deleteTask(index)">
+              <app-icon img="trash"></app-icon>
             </a>
           </div>
         </template>
@@ -48,20 +43,18 @@
         <template v-else>
           <input type="text" v-model="draft">
           <div>
-            <a href="#" @click="updateTask(task)">
-              <span class="glyphicon glyphicon-ok"
-                        aria-hidden="true" ></span>
+            <a @click="updateTask(task)">
+              <app-icon img="ok"></app-icon>
             </a>
-            <a href="#" @click="cancelUpdate(task)">
-              <span class="glyphicon glyphicon-remove"
-                        aria-hidden="true" ></span>
+            <a @click="cancelUpdate(task)">
+              <app-icon img="remove"></app-icon>
             </a>
           </div>
         </template>
       </li>
     </ul>
 
-    <p><a href="#" @click="deleteCompleted">Eliminar tareas completadas</a></p>
+    <p><a @click="deleteCompleted">Eliminar tareas completadas</a></p>
 
       <form class="new-task-form" @submit.prevent="createTask">
         <input type="text" class="form-control" v-model="new_task">

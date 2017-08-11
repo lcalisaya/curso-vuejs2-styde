@@ -18,3 +18,4 @@ README.md
 * Lección #12: Guardar tareas en el objeto tasks.
 * Lección #13: Editar una tarea, primero su borrador para luego confirmar o cancelar el cambio.
 * Lección #14: Eliminar la tarea de la lista seleccionada y borrar todas las tareas completadas.
+* Lección #15: Primer componente global para los íconos.
