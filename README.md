@@ -19,3 +19,4 @@ README.md
 * Lección #13: Editar una tarea, primero su borrador para luego confirmar o cancelar el cambio.
 * Lección #14: Eliminar la tarea de la lista seleccionada y borrar todas las tareas completadas.
 * Lección #15: Primer componente global para los íconos.
+* Lección #16: Componente para representar una tarea, con sus propiedades y métodos.
