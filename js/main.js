@@ -13,23 +13,30 @@ Vue.component('app-icon', {
 Vue.component('app-task', {
   template: '#task-template',
   props: ['tasks','task', 'index'], //las propiedades de 1 tarea
-  methods: {                            //las acciones de 1 tarea
+  data: function(){
+    return {
+      editing: false, //Forma parte del componente y no de las propiedades de la tarea
+      draft: '',  //Forma parte del componente y no de las propiedades de la tarea
+    };
+  },
+  methods: {                            //Las acciones de 1 tarea
     toggleStatus: function(){
       this.task.pending = !this.task.pending;  //Se cambia el estado de la tarea: pendiente o no
     },
     edit: function(){
-      this.tasks.forEach(function(item){
-        item.editing = false; //Para que todas las tareas se muestren sin estilos de edición
-      });
+      // FIX ME: reimplement this!
+      // this.tasks.forEach(function(item){
+      //   item.editing = false; //Para que todas las tareas se muestren sin estilos de edición
+      // });
       this.draft = this.task.description;
-      this.task.editing = true; //Se edita una tarea a la vez, unicamente
+      this.editing = true; //Se edita una tarea a la vez, unicamente
     },
     update: function(){
       this.task.description = this.draft;
-      this.task.editing = false; //Se confirman los cambios a la tarea
+      this.editing = false; //Se confirman los cambios a la tarea
     },
     cancel: function(){
-      this.task.editing = false; //Se cancelan los cambios a una tarea
+      this.editing = false; //Se cancelan los cambios a una tarea
     },
     remove: function(){
       this.tasks.splice(this.index,1); //Elige el item con posición index y con '1' se elimina el item indicado
@@ -41,25 +48,31 @@ var vm = new Vue({
   el: '#app',
   data: {
     new_task: '',
-    draft: '',
     tasks: [
       {
         description: 'Aprender Vue.js',
-        pending: true,
-        editing: false
+        pending: true
       },
       {
         description: 'Aprender a maquetar',
-        pending: true,
-        editing: false
+        pending: true
       },
       {
         description: 'Escuchar radio',
-        pending: false,
-        editing: false
+        pending: false
       }
     ]
   },
+  // created: function(){
+  //   this.tasks.forEach(function(tarea){
+  //     this.$set(tarea, 'editing', false);
+  //   }.bind(this) ); //Asocia esta función anónima al objeto vm
+
+  //   Con ES6, la => function ya hace referencia a this
+  //   this.tasks.forEach( tarea => {
+  //     this.$set(tarea, 'editing', false);
+  //  });
+  // },
   methods: {
     createTask: function(){
       this.tasks.push({ //Se guarda una tarea en la lista de tareas

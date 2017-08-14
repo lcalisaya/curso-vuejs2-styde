@@ -25,10 +25,13 @@
       <li is="app-task" v-for="(tarea, indice) in tasks" :tasks="tasks" :index="indice" :task="tarea"></li> <!-- Este componente hace referencia a una tarea puntual -->
     </ul>
 
-    <p><a @click="deleteCompleted">Eliminar tareas completadas</a></p>
+    <p v-if="tasks.length != 0">
+      <a @click="deleteCompleted">Eliminar tareas completadas</a>
+    </p>
+    <h4 v-else>Cantidad de tareas: 0. Complete el campo "Descripción" e ingrese una nueva tarea.</h4>
 
       <form class="new-task-form" @submit.prevent="createTask">
-        <input type="text" class="form-control" v-model="new_task">
+        <input type="text" class="form-control" v-model="new_task" placeholder="Descripción de tarea">
         <button class="btn btn-primary">Crear tarea</button>
       </form>
 
@@ -40,12 +43,12 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.4.2/vue.js"></script>
 
   <script  id="task-template" type="text/x-template">
-  <li class="list-group-item" :class="{ editing: task.editing, completed: !task.pending }">
+  <li class="list-group-item" :class="{ editing: editing, completed: !task.pending }">
     <a @click="toggleStatus">
       <app-icon :img="task.pending ? 'unchecked' : 'check' "></app-icon>
     </a>
 
-    <template v-if="!task.editing">
+    <template v-if="!editing">
       <span class="description">{{ task.description }}</span>
       <div>
         <a @click="edit">
