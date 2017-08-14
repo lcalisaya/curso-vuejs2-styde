@@ -22,8 +22,8 @@
     <h2>Tareas</h2>
 
     <ul class="list-group tasks">
-      <li is="app-task" v-for="(tarea, indice) in tasks" :tasks="tasks" :index="indice" :task="tarea"></li> <!-- Este componente hace referencia a una tarea puntual -->
-    </ul>
+      <li is="app-task" v-for="(tarea, indice) in tasks" :index="indice" :task="tarea" @remove="deleteTask"></li> <!-- Este componente hace referencia a una tarea puntual -->
+    </ul>                                                                                                                   <!--evento personal @remove-->
 
     <p v-if="tasks.length != 0">
       <a @click="deleteCompleted">Eliminar tareas completadas</a>
@@ -54,7 +54,7 @@
         <a @click="edit">
           <app-icon img="edit"></app-icon>
         </a>
-        <a @click="remove">
+        <a @click="remove"> <!--evento que hará que se ejecute el evento personalizado @remove-->
           <app-icon img="trash"></app-icon>
         </a>
       </div>

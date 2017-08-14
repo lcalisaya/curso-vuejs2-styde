@@ -12,7 +12,7 @@ Vue.component('app-icon', {
 //Se representa una tarea individual, que está dentro del componente
 Vue.component('app-task', {
   template: '#task-template',
-  props: ['tasks','task', 'index'], //las propiedades de 1 tarea
+  props: ['task', 'index'], //las propiedades de 1 tarea
   data: function(){
     return {
       editing: false, //Forma parte del componente y no de las propiedades de la tarea
@@ -39,7 +39,8 @@ Vue.component('app-task', {
       this.editing = false; //Se cancelan los cambios a una tarea
     },
     remove: function(){
-      this.tasks.splice(this.index,1); //Elige el item con posición index y con '1' se elimina el item indicado
+      this.$emit('remove', this.index); //$emit(nombre evento, argumento)
+      //No se elimina la tarea, se crea un evento para que sea escuchado en la vista
     }
   }
 });
@@ -86,6 +87,9 @@ var vm = new Vue({
       this.tasks = this.tasks.filter(function(item){
         return item.pending; //Solo se devuelven las tareas que están pendientes
       });
+    },
+    deleteTask: function(index){
+      this.tasks.splice(index,1); //Elige el item con posición index y con '1' se elimina el item indicado
     }
   }
 });

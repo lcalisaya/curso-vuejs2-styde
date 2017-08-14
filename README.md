@@ -21,3 +21,4 @@ README.md
 * Lección #15: Primer componente global para los íconos.
 * Lección #16: Componente para representar una tarea, con sus propiedades y métodos.
 * Lección #17: Separación de datos que son para la vista y datos que son del modelo.
+* Lección #18: Crear un evento personalizado y que se ejecute luego de un evento de Vue.
