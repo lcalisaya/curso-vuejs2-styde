@@ -1,3 +1,6 @@
+//Objeto vm
+var EventBus = new Vue;
+
 //Para crear un componente de foma global
 Vue.component('app-icon', {
   template: '<span :class="cssClasses" aria-hidden="true"></span>',
@@ -19,15 +22,22 @@ Vue.component('app-task', {
       draft: '',  //Forma parte del componente y no de las propiedades de la tarea
     };
   },
-  methods: {                            //Las acciones de 1 tarea
+  created: function(){
+    EventBus.$on('editing', function(index){ //Se está escuchando @editing. Cuando se dispare, hay que ejecutar la función anónima.
+      if (this.index != index) {
+        this.cancel();
+      }
+    }.bind(this));
+  },
+  methods: {   //Las acciones de 1 tarea
     toggleStatus: function(){
       this.task.pending = !this.task.pending;  //Se cambia el estado de la tarea: pendiente o no
     },
     edit: function(){
-      // FIX ME: reimplement this!
       // this.tasks.forEach(function(item){
       //   item.editing = false; //Para que todas las tareas se muestren sin estilos de edición
       // });
+      EventBus.$emit('editing', this.index); //Se emite,se produce el evento @editing
       this.draft = this.task.description;
       this.editing = true; //Se edita una tarea a la vez, unicamente
     },
@@ -40,7 +50,7 @@ Vue.component('app-task', {
     },
     remove: function(){
       this.$emit('remove', this.index); //$emit(nombre evento, argumento)
-      //No se elimina la tarea, se crea un evento para que sea escuchado en la vista
+      //No se elimina la tarea, se crea un evento para que sea escuchado en la vista del objeto vm
     }
   }
 });
