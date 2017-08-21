@@ -11,10 +11,12 @@ Vue.component('app-icon', {
     }
   }
 });
+
 //Cada componente es como un objeto vm aparte
 //Se representa una tarea individual, que está dentro del componente
 Vue.component('app-task', {
   template: '#task-template',
+
   props: ['task', 'index'], //las propiedades de 1 tarea
   data: function(){
     return {
@@ -29,6 +31,7 @@ Vue.component('app-task', {
       }
     }.bind(this));
   },
+
   methods: {   //Las acciones de 1 tarea
     toggleStatus: function(){
       this.task.pending = !this.task.pending;  //Se cambia el estado de la tarea: pendiente o no
@@ -57,6 +60,7 @@ Vue.component('app-task', {
 
 var vm = new Vue({
   el: '#app',
+
   data: {
     new_task: '',
     tasks: [

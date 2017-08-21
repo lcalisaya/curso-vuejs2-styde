@@ -1,68 +1,72 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <h3>App generada con el comando: vue init webpack-simple [nombre de proyecto]</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://gitter.im/vuejs/vue" target="_blank">Gitter Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
+  <div id="app" class="container">
+    <h2>Tareas</h2>
+
+    <ul class="list-group tasks">
+      <li is="app-task" v-for="(tarea, indice) in tasks" :index="indice" :task="tarea" @remove="deleteTask"></li> <!-- Este componente hace referencia a una tarea puntual -->
+    </ul>                                                                                                                   <!--evento personal @remove-->
+
+    <p v-if="tasks.length != 0">
+      <a @click="deleteCompleted">Eliminar tareas completadas</a>
+    </p>
+    <h4 v-else>Cantidad de tareas: 0. Complete el campo "Descripción" e ingrese una nueva tarea.</h4>
+
+      <form class="new-task-form" @submit.prevent="createTask">
+        <input type="text" class="form-control" v-model="new_task" placeholder="Descripción de tarea">
+        <button class="btn btn-primary">Crear tarea</button>
+      </form>
+
+    <footer>
+      <p>&copy; 2017 Styde.net.</p>
+    </footer>
   </div>
+
 </template>
 
+<!--  Vamos a exportar un objeto para que se pueda utilizar en main.js -->
 <script>
+
+import Task from './Task.vue'
 export default {
-  name: 'app',
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
+  components: {
+    'app-task': Task
+  },
+    data: function() {  //Se trabaja con un componente, por eso data tiene que ser función que retorne un objeto
+      return {
+        new_task: '',
+        tasks: [
+          {
+            description: 'Aprender Vue.js',
+            pending: true
+          },
+          {
+            description: 'Aprender a maquetar',
+            pending: true
+          },
+          {
+            description: 'Escuchar radio',
+            pending: false
+          }
+        ]
+      }
+    },
+  methods: {
+    createTask: function(){
+      this.tasks.push({ //Se guarda una tarea en la lista de tareas
+        description: this.new_task,
+        pending: true,
+        editing: false
+      });
+    this.new_task = ''; //Para que el campo quede listo para ingresar una nueva tarea
+  },
+    deleteCompleted: function(){
+      this.tasks = this.tasks.filter(function(item){
+        return item.pending; //Solo se devuelven las tareas que están pendientes
+      });
+    },
+    deleteTask: function(index){
+      this.tasks.splice(index,1); //Elige el item con posición index y con '1' se elimina el item indicado
     }
   }
 }
 </script>
-
-<style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-
-h1, h2 {
-  font-weight: normal;
-}
-
-h3 {
-  color: #44ba1b;
-  background-color: yellow;
-  display: inline;
-  padding: 10px;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
-}
-</style>

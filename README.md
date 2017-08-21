@@ -24,3 +24,4 @@ README.md
 * Lección #18: Crear un evento personalizado y que se ejecute luego de un evento de Vue.
 * Lección #19: El objeto EventBus para transmitir eventos entre componentes.
 * Lección #20: Instalación de vue-cli y apps creadas con comandos "simple" y "webpack-simple".
+* Lección #21: Separación de componentes en diferentes archivos.
